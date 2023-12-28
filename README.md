@@ -3,7 +3,9 @@
 A [PeterOS](https://github.com/Platratio34/peterOS) [pgm-get](https://github.com/peterOS-pgm-get/pgm-get) program
 
 Install on PeterOS via:
-`pgm-get install pointOfSale`
+```console
+pgm-get install pointOfSale
+```
 
 ## Command
 
@@ -46,10 +48,10 @@ JSON array formatted list of products objects.
 
 ``` json
 [
-    {"id":0001, "price":32,   "name":"LUA for Dummies"},
-    {"id":0002, "price":100,  "name":"Leather Tunic"},
-    {"id":0003, "price":7,    "name":"Fish Sandwich"},
-    {"id":0099, "price":153,  "name":"Movie Ticket"},
+    {"id":1,    "price":32,   "name":"LUA for Dummies"},
+    {"id":2,    "price":100,  "name":"Leather Tunic"},
+    {"id":3,    "price":7,    "name":"Fish Sandwich"},
+    {"id":99,   "price":153,  "name":"Movie Ticket"},
     {"id":1234, "price":9999, "name":"Elytra"}
 ]
 ```
