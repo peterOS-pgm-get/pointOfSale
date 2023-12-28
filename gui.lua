@@ -67,7 +67,6 @@ local function checkout()
     local total = calcTotal()
     local s, r = pgm.pointOfSale.makeTransaction(total)
     if s then
-        gui.checkout:hide()
 
         if cfg.printReceipt then
             local printer = peripheral.find('printer')
@@ -166,6 +165,8 @@ for i, product in pairs(products) do
     gui.productList:addElement(product.button)
     gui.prodEls[product.id] = product
 end
+
+net.setup()
 
 local idSearch = ''
 local nameSearch = ''
