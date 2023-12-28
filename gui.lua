@@ -71,8 +71,8 @@ local function checkout()
         if cfg.printReceipt then
             local printer = peripheral.find('printer')
             if printer then
-                local pw, ph = printer.getPageSize()
                 printer.newPage()
+                local pw, ph = printer.getPageSize()
                 printer.write('Receipt - ' .. cfg.name)
                 printer.setCursorPos(1, 2)
                 printer.write(string.rep('-', pw))
