@@ -26,7 +26,10 @@ read('')
 
 local s, r = pgm.pointOfSale.makeTransaction(amount)
 if s then
-    print(r)
+    print(r[1])
 else
+    if type(r) == 'table' then
+        r = r[1]
+    end
     printError(r)
 end

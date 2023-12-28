@@ -53,9 +53,14 @@ end
 gui.cartClear = pos.gui.Button(32, 3, 5, 1, colors.red, nil, 'Clear', clearCart)
 gui.window:addElement(gui.cartClear)
 
--- gui.checkoutWindow = pos.gui.Window('Checkout', colors.gray)
--- pos.gui.addWindow(gui.checkoutWindow)
--- gui.checkoutWindow:setSize(20,10)
+gui.errorWindow = pos.gui.Window('Error', colors.red)
+pos.gui.addWindow(gui.errorWindow)
+gui.errorWindow:setSize(15, 4)
+gui.errorWindow:setPos(15, 5)
+gui.errorWindow.exitOnHide = false
+
+gui.ew_errorText = pos.gui.TextBox(2, 3, colors.red, nil, '', 13)
+gui.errorWindow:addElement(gui.ew_errorText)
 
 -- gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
 local function checkout()
@@ -63,7 +68,7 @@ local function checkout()
     local s, r = pgm.pointOfSale.makeTransaction(total)
     if s then
         gui.checkout:hide()
-        
+
         if cfg.printReceipt then
             local printer = peripheral.find('printer')
             if printer then
@@ -74,7 +79,7 @@ local function checkout()
                 printer.write(string.rep('-', pw))
                 printer.setCursorPos(1, 3)
                 printer.write(' Qty Price   Product')
-                if #cart < ph - 4 then
+                if #cart < ph - 6 then
                     local y = 4
                     for _, p in pairs(cart) do
                         printer.setCursorPos(1, y)
@@ -83,9 +88,11 @@ local function checkout()
                     end
                     printer.setCursorPos(1, y)
                     printer.write(('Total:$%.2f'):format(total))
+                    printer.setCursorPos(1, y+1)
+                    printer.write(('Transaction ID: %s'):format(r[2]))
                     printer.endPage()
                 else
-                
+
                 end
             end
         end
@@ -93,6 +100,11 @@ local function checkout()
         clearCart()
         return
     end
+    if type(r) == 'table' then
+        r = r[1]
+    end
+    gui.ew_errorText:setText(r)
+    gui.errorWindow:show()
 end
 -- gui.checkoutWindow:addElement(gui.cw_confirm)
 
