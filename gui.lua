@@ -21,6 +21,10 @@ if not products then
     return
 end
 
+gui.window = pos.gui.Window('Point Of Sale')
+pos.gui.addWindow(gui.window)
+gui.window:show()
+
 local cart = {}
 
 gui.cartList = pos.gui.ListField(34, 3, 16, gui.window.h - 1)
@@ -36,7 +40,8 @@ local function addToCart(product)
         prod.price = product.id
         prod.name = product.name
         prod.qty = 1
-        prod.button = pos.gui.Button(1,#cart+1,16,1,nil,nil,('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name),function()
+        prod.button = pos.gui.Button(1, #cart + 1, 16, 1, nil, nil,
+            ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name), function()
             prod.qty = prod.qty - 1
             if prod.qty <= 0 then
                 cart[prod.id] = nil
@@ -49,10 +54,6 @@ local function addToCart(product)
         cart[prod.id] = prod
     end
 end
-
-gui.window = pos.gui.Window('Point Of Sale')
-pos.gui.addWindow(gui.window)
-gui.window:show()
 
 gui.idSearch = pos.gui.TextInput(1, 2, 4)
 gui.window:addElement(gui.idSearch)
