@@ -23,6 +23,33 @@ end
 
 local cart = {}
 
+gui.cartList = pos.gui.ListField(34, 3, 16, gui.window.h - 1)
+gui.window:addElement(gui.cartList)
+
+local function addToCart(product)
+    if cart[product.id] then
+        local prod = cart[product.id]
+        prod.qty = prod.qty + 1
+        prod.button.text = ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name)
+    else
+        local prod = {}
+        prod.price = product.id
+        prod.name = product.name
+        prod.qty = 1
+        prod.button = pos.gui.Button(1,#cart+1,16,1,nil,nil,('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name),function()
+            prod.qty = prod.qty - 1
+            if prod.qty <= 0 then
+                cart[prod.id] = nil
+                gui.cartList:removeElement(prod.buttonId)
+                return
+            end
+            prod.button.text = ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name)
+        end)
+        prod.buttonId = gui.cartList:addElement(prod.button)
+        cart[prod.id] = prod
+    end
+end
+
 gui.window = pos.gui.Window('Point Of Sale')
 pos.gui.addWindow(gui.window)
 gui.window:show()
@@ -40,7 +67,7 @@ for i, product in pairs(products) do
     local text = ('% 5d % 9s %s'):format(product.id, ('$%.2f'):format(product.price), product.name)
     local prod = product
     product.button = pos.gui.Button(1, i, 32, 1, colors.black, nil, text, function()
-        table.insert(cart, prod)
+        addToCart(prod)
     end)
     gui.productList:addElement(product.button)
     gui.prodEls[product.id] = product
