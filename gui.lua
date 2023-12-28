@@ -27,8 +27,19 @@ gui.window:show()
 
 local cart = {}
 
-gui.cartList = pos.gui.ListField(34, 3, 16, gui.window.h - 1)
+local function calcTotal()
+    local total = 0
+    for _, p in pairs(cart) do
+        total = total + (p.qty * p.price)
+    end
+    return total
+end
+
+gui.cartList = pos.gui.ListField(32, 5, 16, gui.window.h - 1)
 gui.window:addElement(gui.cartList)
+
+gui.cartTotal = pos.gui.TextBox(32, 4, nil, nil, 'Total: $0.00', gui.window.w - 32)
+gui.window:addElement(gui.cartTotal)
 
 local function addToCart(product)
     if cart[product.id] then
@@ -42,8 +53,12 @@ local function addToCart(product)
         prod.name = product.name
         prod.qty = 1
         prod.button = pos.gui.Button(1, #cart + 1, 16, 1, nil, nil,
-            ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name), function()
+            ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name), function(btn)
+            if btn ~= 2 then
+                return
+            end
             prod.qty = prod.qty - 1
+            gui.cartTotal:setText(("Total: $%.2f"):format(calcTotal()))
             if prod.qty <= 0 then
                 cart[prod.id] = nil
                 gui.cartList:removeElement(prod.buttonId)
@@ -54,6 +69,7 @@ local function addToCart(product)
         prod.buttonId = gui.cartList:addElement(prod.button)
         cart[prod.id] = prod
     end
+    gui.cartTotal:setText(("Total: $%.2f"):format(calcTotal()))
 end
 
 gui.idSearch = pos.gui.TextInput(1, 2, 5)
@@ -61,14 +77,17 @@ gui.window:addElement(gui.idSearch)
 gui.nameSearch = pos.gui.TextInput(17, 2, 12)
 gui.window:addElement(gui.nameSearch)
 
-gui.productList = pos.gui.ListField(1, 3, 32, gui.window.h - 1)
+gui.productList = pos.gui.ListField(1, 3, 30, gui.window.h - 1)
 gui.window:addElement(gui.productList)
 
 gui.prodEls = {}
 for i, product in pairs(products) do
     local text = ('% 5d % 9s %s'):format(product.id, ('$%.2f'):format(product.price), product.name)
     local prod = product
-    product.button = pos.gui.Button(1, i, 32, 1, colors.black, nil, text, function()
+    product.button = pos.gui.Button(1, i, 30, 1, colors.black, nil, text, function(btn)
+        if btn ~= 1 then
+            return
+        end
         addToCart(prod)
     end)
     gui.productList:addElement(product.button)
