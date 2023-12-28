@@ -73,7 +73,7 @@ function pointOfSale.makeTransaction(amount, card)
         ---@cast r string
         return false, r
     else
-        return r.header.code == 200, r.body[1]
+        return r.header.code == 200, r.body
     end
 end
 
