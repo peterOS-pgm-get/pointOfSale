@@ -63,7 +63,7 @@ gui.ew_errorText = pos.gui.TextBox(2, 2, colors.red, nil, '', 18)
 gui.errorWindow:addElement(gui.ew_errorText)
 
 gui.doneWindow = pos.gui.Window('', colors.green)
-pos.gui.addWindow(gui.errorWindow)
+pos.gui.addWindow(gui.doneWindow)
 gui.doneWindow:setSize(20, 4)
 gui.doneWindow:setPos(12, 5)
 gui.doneWindow.exitOnHide = false
@@ -102,11 +102,11 @@ local function checkout()
                 else
 
                 end
-                gui.dw_text:setText(r[1])
-                gui.doneWindow:show()
             end
         end
 
+        gui.dw_text:setText(r[1])
+        gui.doneWindow:show()
         clearCart()
         return
     end
