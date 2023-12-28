@@ -1,6 +1,6 @@
 local gui = {}
 local cfg = {
-    productFilePath = '/home/products/json'
+    productFilePath = '/home/products.json'
 }
 cfg = pos.Config('%appdata%/pointOfSale/cfg.json', cfg, true)
 
