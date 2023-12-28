@@ -67,7 +67,7 @@ function pointOfSale.makeTransaction(amount, card)
         key = pointOfSale._key,
         origin = card,
         amount = amount
-    })
+    }, nil, 10)
 
     if type(r) ~= 'table' then
         ---@cast r string
