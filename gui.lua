@@ -53,16 +53,12 @@ end
 gui.cartClear = pos.gui.Button(32, 3, 5, 1, colors.red, nil, 'Clear', clearCart)
 gui.window:addElement(gui.cartClear)
 
-gui.checkoutWindow = pos.gui.Window('Checkout', colors.gray)
-pos.gui.addWindow(gui.checkoutWindow)
-gui.checkoutWindow:setSize(20,10)
+-- gui.checkoutWindow = pos.gui.Window('Checkout', colors.gray)
+-- pos.gui.addWindow(gui.checkoutWindow)
+-- gui.checkoutWindow:setSize(20,10)
 
-gui.checkout = pos.gui.Button(39, 3, 8, 1, colors.green, nil, 'Checkout', function()
-    gui.checkoutWindow:show()
-end)
-gui.window:addElement(gui.checkout)
-
-gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
+-- gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
+local function checkout()
     local total = calcTotal()
     local s, r = pgm.pointOfSale.makeTransaction(total)
     if s then
@@ -97,7 +93,14 @@ gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
         clearCart()
         return
     end
+end
+-- gui.checkoutWindow:addElement(gui.cw_confirm)
+
+gui.checkout = pos.gui.Button(39, 3, 8, 1, colors.green, nil, 'Checkout', function()
+    -- gui.checkoutWindow:show()
+    checkout()
 end)
+gui.window:addElement(gui.checkout)
 
 local function addToCart(product)
     if cart[product.id] then
