@@ -37,7 +37,8 @@ local function addToCart(product)
         prod.button.text = ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name)
     else
         local prod = {}
-        prod.price = product.id
+        prod.id = product.id
+        prod.price = product.price
         prod.name = product.name
         prod.qty = 1
         prod.button = pos.gui.Button(1, #cart + 1, 16, 1, nil, nil,
@@ -55,7 +56,7 @@ local function addToCart(product)
     end
 end
 
-gui.idSearch = pos.gui.TextInput(1, 2, 4)
+gui.idSearch = pos.gui.TextInput(1, 2, 5)
 gui.window:addElement(gui.idSearch)
 gui.nameSearch = pos.gui.TextInput(17, 2, 12)
 gui.window:addElement(gui.nameSearch)
