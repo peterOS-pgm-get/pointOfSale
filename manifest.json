@@ -1,8 +1,9 @@
 {
-    "version": 0.1,
+    "version": 0.2,
     "files": [
         "main.lua",
-        "cmd.lua"
+        "cmd.lua",
+        "gui.lua"
     ],
     "exec": "cmd.lua",
     "cmpt": null,
