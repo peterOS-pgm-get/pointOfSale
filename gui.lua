@@ -62,6 +62,15 @@ gui.errorWindow.exitOnHide = false
 gui.ew_errorText = pos.gui.TextBox(2, 3, colors.red, nil, '', 13)
 gui.errorWindow:addElement(gui.ew_errorText)
 
+gui.doneWindow = pos.gui.Window('', colors.green)
+pos.gui.addWindow(gui.errorWindow)
+gui.doneWindow:setSize(15, 4)
+gui.doneWindow:setPos(15, 5)
+gui.doneWindow.exitOnHide = false
+
+gui.dw_text = pos.gui.TextBox(2, 3, colors.green, nil, '', 13)
+gui.doneWindow:addElement(gui.dw_text)
+
 -- gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
 local function checkout()
     local total = calcTotal()
@@ -82,17 +91,19 @@ local function checkout()
                     local y = 4
                     for _, p in pairs(cart) do
                         printer.setCursorPos(1, y)
-                        printer.write(('% 3d% 6.2f %s'):format(p.qty, p.price, p.name))
+                        printer.write(('% 3d% 8.2f %s'):format(p.qty, p.price, p.name))
                         y = y + 1
                     end
                     printer.setCursorPos(1, y)
                     printer.write(('Total:$%.2f'):format(total))
                     printer.setCursorPos(1, y+1)
-                    printer.write(('Transaction ID: %s'):format(r[2]))
+                    printer.write(r[2])
                     printer.endPage()
                 else
 
                 end
+                gui.dw_text:setText(r[1])
+                gui.doneWindow:show()
             end
         end
 
