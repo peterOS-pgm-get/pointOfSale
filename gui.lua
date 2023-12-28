@@ -27,7 +27,7 @@ gui.productList = pos.gui.ListField(1, 2, 32, gui.window.h - 1)
 gui.window:addElement(gui.productList)
 
 for i, product in pairs(products) do
-    local text = ('% 4d % 6s %s'):format(product.id, '$' .. product.price, product.name)
+    local text = ('% 4d % 6s %s'):format(product.id, ('$%.2f'):format(product.price), product.name)
     local button = pos.gui.Button(1, i, 32, 1, colors.black, nil, text, function()
 
     end)
