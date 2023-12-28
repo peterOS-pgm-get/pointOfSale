@@ -25,15 +25,17 @@ Alternate `-g`
 
 | Field            | Default                         | Description                 |
 | ---------------- | ------------------------------- | --------------------------- |
-|  drive           | `/disk/`                        | Drive path for reading card |
-|  server          | `api.citybank.com`              | URL of transaction server   |
-|  keyPath         | `%appdata%/transaction/key.key` | Path to transaction key file |
+|  drive           | `"/disk/"`                        | Drive path for reading card |
+|  server          | `"api.citybank.com"`              | URL of transaction server   |
+|  keyPath         | `"%appdata%/transaction/key.key"` | Path to transaction key file |
 
 ### GUI: `%appdata%/pointOfSale/cfg.json`
 
-| Field           | Default               | Description                |
-| --------------- | --------------------- | -------------------------- |
-| productFilePath | `/home/products.json` | File path for product data |
+| Field           | Default                 | Description                    |
+| --------------- | ----------------------- | ------------------------------ |
+| productFilePath | `"/home/products.json"` | File path for product data     |
+| printReceipt    | `true`                  | If a receipt should be printed |
+| name            | `""`                    | Name for receipts and transaction description |
 
 ## Product file
 

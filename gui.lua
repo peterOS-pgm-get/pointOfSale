@@ -1,6 +1,8 @@
 local gui = {}
 local cfg = {
-    productFilePath = '/home/products.json'
+    productFilePath = '/home/products.json',
+    printReceipt = true,
+    name = ''
 }
 local config = pos.Config('%appdata%/pointOfSale/cfg.json', cfg, true)
 cfg = config.data
@@ -51,10 +53,51 @@ end
 gui.cartClear = pos.gui.Button(32, 3, 5, 1, colors.red, nil, 'Clear', clearCart)
 gui.window:addElement(gui.cartClear)
 
+gui.checkoutWindow = pos.gui.Window('Checkout', colors.gray)
+pos.gui.addWindow(gui.checkoutWindow)
+gui.checkoutWindow:setSize(20,10)
+
 gui.checkout = pos.gui.Button(39, 3, 8, 1, colors.green, nil, 'Checkout', function()
-    
+    gui.checkoutWindow:show()
 end)
 gui.window:addElement(gui.checkout)
+
+gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
+    local total = calcTotal()
+    local s, r = pgm.pointOfSale.makeTransaction(total)
+    if s then
+        gui.checkout:hide()
+        
+        if cfg.printReceipt then
+            local printer = peripheral.find('printer')
+            if printer then
+                local pw, ph = printer.getPageSize()
+                printer.newPage()
+                printer.write('Receipt - ' .. cfg.name)
+                printer.setCursorPos(1, 2)
+                printer.write(string.rep('-', pw))
+                printer.setCursorPos(1, 3)
+                printer.write(' Qty Price   Product')
+                if #cart < ph - 4 then
+                    local y = 4
+                    for _, p in pairs(cart) do
+                        printer.setCursorPos(1, y)
+                        printer.write(('% 3d% 6.2f %s'):format(p.qty, p.price, p.name))
+                        y = y + 1
+                    end
+                    printer.setCursorPos(1, y)
+                    printer.write(('Total:$%.2f'):format(total))
+                    printer.endPage()
+                else
+                
+                end
+            end
+        end
+
+        clearCart()
+        return
+    end
+end)
 
 local function addToCart(product)
     if cart[product.id] then
