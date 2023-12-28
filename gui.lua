@@ -48,10 +48,10 @@ local function clearCart()
     cart = {}
     gui.cartTotal:setText("Total: $0.00")
 end
-gui.cartClear = pos.gui.Button(32, 3, 5, 1, nil, nil, 'Clear', clearCart)
+gui.cartClear = pos.gui.Button(32, 3, 5, 1, colors.red, nil, 'Clear', clearCart)
 gui.window:addElement(gui.cartClear)
 
-gui.checkout = pos.gui.Button(39, 3, 8, 1, nil, nil, 'Checkout', function()
+gui.checkout = pos.gui.Button(39, 3, 8, 1, colors.green, nil, 'Checkout', function()
     
 end)
 gui.window:addElement(gui.checkout)
