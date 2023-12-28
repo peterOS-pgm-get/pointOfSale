@@ -46,8 +46,8 @@ end
 local idSearch = ''
 local nameSearch = ''
 pos.gui.run(function(event)
-    if gui.idSearch.text() ~= idSearch or gui.nameSearch.text() ~= nameSearch then
-        idSearch = gui.idSearch.text()
+    if gui.idSearch.text ~= idSearch or gui.nameSearch.text ~= nameSearch then
+        idSearch = gui.idSearch.text
         for id, product in pairs(products) do
             local idStr = '' .. id
             local si, ei = idStr:find(idSearch)
@@ -57,7 +57,7 @@ pos.gui.run(function(event)
                 product.button.visible = false
             end
         end
-        nameSearch = gui.nameSearch.text()
+        nameSearch = gui.nameSearch.text
         for _, product in pairs(products) do
             if not product.name:cont(nameSearch) then
                 product.button.visible = false
