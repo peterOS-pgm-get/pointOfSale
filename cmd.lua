@@ -1,17 +1,22 @@
-local args = {...}
+local clArgs = { ... }
 
-if args[1] == 'mon' then
-    print("Not yet implemented")
-    return
-elseif #args > 0 then
-    printError("Unknown argument")
+local parser = pos.Parser()
+parser:addFlag('gui', 'g')
+local args, flags = parser:parse(clArgs)
+
+if flags.gui then
+    dofile('gui.lua')
     return
 end
 
-term.write('Enter Amount: $')
-local a = tonumber(read())
+local a = args[1] ---@type string
 if not a then
-    printError('Must enter a number')
+    term.write('Enter Amount: $')
+    a = read()
+end
+local amount = tonumber(a)
+if not amount then
+    printError('Amount must be a number')
     return
 end
 
@@ -19,7 +24,7 @@ print('')
 print('Press enter when card is in')
 read('')
 
-local s, r = pgm.pointOfSale.makeTransaction(a)
+local s, r = pgm.pointOfSale.makeTransaction(amount)
 if s then
     print(r)
 else

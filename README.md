@@ -13,9 +13,10 @@ pgm-get install pointOfSale
 
 Make a simple amount transaction from the account associated from card in disk drive. If `amount` is absent, it will be prompted.
 
-### `pointOfSale -g`: Graphical
+### `pointOfSale -gui`: Graphical
 
 Opens a customizable GUI including product list, card, and receipt printing.
+Alternate `-g`
 
 
 ## Config
