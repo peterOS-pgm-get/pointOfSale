@@ -29,6 +29,8 @@ Alternate `-g`
 |  server          | `"api.citybank.com"`              | URL of transaction server    |
 |  keyPath         | `"%appdata%/transaction/key.key"` | Path to transaction key file |
 
+### Ex.
+
 ```json
 {
     "drive":"/disk/",
@@ -44,6 +46,8 @@ Alternate `-g`
 | productFilePath | `"/home/products.json"` | File path for product data                    |
 | printReceipt    | `true`                  | If a receipt should be printed                |
 | name            | `""`                    | Name for receipts and transaction description |
+
+### Ex.
 
 ```json
 {
