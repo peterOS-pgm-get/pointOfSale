@@ -29,6 +29,14 @@ Alternate `-g`
 |  server          | `"api.citybank.com"`              | URL of transaction server    |
 |  keyPath         | `"%appdata%/transaction/key.key"` | Path to transaction key file |
 
+```json
+{
+    "drive":"/disk/",
+    "server":"api.citybank.com",
+    "keyPath":"%appdata%/transaction/key.key"
+}
+```
+
 ### GUI: `%appdata%/pointOfSale/cfg.json`
 
 | Field           | Default                 | Description                                   |
@@ -36,6 +44,14 @@ Alternate `-g`
 | productFilePath | `"/home/products.json"` | File path for product data                    |
 | printReceipt    | `true`                  | If a receipt should be printed                |
 | name            | `""`                    | Name for receipts and transaction description |
+
+```json
+{
+    "productFilePath":"/home/products.json",
+    "printReceipt":true,
+    "name":""
+}
+```
 
 ## Product file
 
