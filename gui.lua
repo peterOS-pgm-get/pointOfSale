@@ -55,20 +55,20 @@ gui.window:addElement(gui.cartClear)
 
 gui.errorWindow = pos.gui.Window('Error', colors.red)
 pos.gui.addWindow(gui.errorWindow)
-gui.errorWindow:setSize(15, 4)
-gui.errorWindow:setPos(15, 5)
+gui.errorWindow:setSize(20, 4)
+gui.errorWindow:setPos(12, 5)
 gui.errorWindow.exitOnHide = false
 
-gui.ew_errorText = pos.gui.TextBox(2, 3, colors.red, nil, '', 13)
+gui.ew_errorText = pos.gui.TextBox(2, 2, colors.red, nil, '', 18)
 gui.errorWindow:addElement(gui.ew_errorText)
 
 gui.doneWindow = pos.gui.Window('', colors.green)
 pos.gui.addWindow(gui.errorWindow)
-gui.doneWindow:setSize(15, 4)
-gui.doneWindow:setPos(15, 5)
+gui.doneWindow:setSize(20, 4)
+gui.doneWindow:setPos(12, 5)
 gui.doneWindow.exitOnHide = false
 
-gui.dw_text = pos.gui.TextBox(2, 3, colors.green, nil, '', 13)
+gui.dw_text = pos.gui.TextBox(2, 2, colors.green, nil, '', 18)
 gui.doneWindow:addElement(gui.dw_text)
 
 -- gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
