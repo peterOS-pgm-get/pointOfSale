@@ -2,9 +2,10 @@ local gui = {}
 local cfg = {
     productFilePath = '/home/products.json'
 }
-cfg = pos.Config('%appdata%/pointOfSale/cfg.json', cfg, true)
+local config = pos.Config('%appdata%/pointOfSale/cfg.json', cfg, true)
+cfg = config.data
 
-if not fs.exits(cfg.productFilePath) then
+if not fs.exists(cfg.productFilePath) then
     error('Product file does not exits')
     return
 end
