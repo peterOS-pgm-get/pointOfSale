@@ -41,6 +41,14 @@ gui.window:addElement(gui.cartList)
 gui.cartTotal = pos.gui.TextBox(32, 4, nil, nil, 'Total: $0.00', gui.window.w - 32)
 gui.window:addElement(gui.cartTotal)
 
+gui.cartClear = pos.gui.Button(32, 3, 5, 1, nil, nil, 'Clear', function()
+    for _, prod in pairs(cart) do
+        gui.cartList:removeElement(prod.buttonId)
+    end
+    cart = {}
+    gui.cartTotal:setText("Total: $0.00")
+end)
+
 local function addToCart(product)
     if cart[product.id] then
         local prod = cart[product.id]
@@ -72,12 +80,12 @@ local function addToCart(product)
     gui.cartTotal:setText(("Total: $%.2f"):format(calcTotal()))
 end
 
-gui.idSearch = pos.gui.TextInput(1, 2, 5)
+gui.idSearch = pos.gui.TextInput(1, 3, 5)
 gui.window:addElement(gui.idSearch)
-gui.nameSearch = pos.gui.TextInput(17, 2, 12)
+gui.nameSearch = pos.gui.TextInput(17, 3, 12)
 gui.window:addElement(gui.nameSearch)
 
-gui.productList = pos.gui.ListField(1, 3, 30, gui.window.h - 1)
+gui.productList = pos.gui.ListField(1, 4, 30, gui.window.h - 1)
 gui.window:addElement(gui.productList)
 
 gui.prodEls = {}
