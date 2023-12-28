@@ -1,0 +1,10 @@
+{
+    "version": 0.1,
+    "files": [
+        "main.lua",
+        "cmd.lua"
+    ],
+    "exec": "cmd.lua",
+    "cmpt": null,
+    "startup": "main.lua"
+}
