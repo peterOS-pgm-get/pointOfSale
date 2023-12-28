@@ -41,13 +41,20 @@ gui.window:addElement(gui.cartList)
 gui.cartTotal = pos.gui.TextBox(32, 4, nil, nil, 'Total: $0.00', gui.window.w - 32)
 gui.window:addElement(gui.cartTotal)
 
-gui.cartClear = pos.gui.Button(32, 3, 5, 1, nil, nil, 'Clear', function()
+local function clearCart()
     for _, prod in pairs(cart) do
         gui.cartList:removeElement(prod.buttonId)
     end
     cart = {}
     gui.cartTotal:setText("Total: $0.00")
+end
+gui.cartClear = pos.gui.Button(32, 3, 5, 1, nil, nil, 'Clear', clearCart)
+gui.window:addElement(gui.cartClear)
+
+gui.checkout = pos.gui.Button(39, 3, 8, 1, nil, nil, 'Checkout', function()
+    
 end)
+gui.window:addElement(gui.checkout)
 
 local function addToCart(product)
     if cart[product.id] then
