@@ -29,7 +29,7 @@ gui.window:show()
 
 gui.idSearch = pos.gui.TextInput(1, 2, 4)
 gui.window:addElement(gui.idSearch)
-gui.nameSearch = pos.gui.TextInput(15, 2, 12)
+gui.nameSearch = pos.gui.TextInput(17, 2, 12)
 gui.window:addElement(gui.nameSearch)
 
 gui.productList = pos.gui.ListField(1, 3, 32, gui.window.h - 1)
@@ -37,7 +37,7 @@ gui.window:addElement(gui.productList)
 
 gui.prodEls = {}
 for i, product in pairs(products) do
-    local text = ('% 4d % 8s %s'):format(product.id, ('$%.2f'):format(product.price), product.name)
+    local text = ('% 5d % 9s %s'):format(product.id, ('$%.2f'):format(product.price), product.name)
     local prod = product
     product.button = pos.gui.Button(1, i, 32, 1, colors.black, nil, text, function()
         table.insert(cart, prod)
