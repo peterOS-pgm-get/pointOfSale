@@ -74,7 +74,7 @@ gui.doneWindow:addElement(gui.dw_text)
 -- gui.cw_confirm = pos.gui.Button(12,9,5,1,colors.green,nil,'Confirm',function()
 local function checkout()
     local total = calcTotal()
-    local s, r = pgm.pointOfSale.makeTransaction(total)
+    local s, r = pgm.pointOfSale.makeTransaction(total, nil, cfg.name)
     if s then
 
         if cfg.printReceipt then

@@ -41,9 +41,10 @@ end
 ---Make a transaction for the given amount from specified account or card in drive
 ---@param amount number Transaction amount (Must be greater than 0)
 ---@param card number|nil Bank card key for origin account or <code>nil</code> to read from card in drive in <code>pgm.pointOfSale.drive</code>
+---@param desc nil|string Optional. Description for transaction
 ---@return boolean success If the transaction was processed successfully
 ---@return string|table response Response from transaction server OR error message
-function pointOfSale.makeTransaction(amount, card)
+function pointOfSale.makeTransaction(amount, card, desc)
     if not pointOfSale._cfgLoaded then
         pointOfSale.loadCfg()
     end
@@ -66,7 +67,8 @@ function pointOfSale.makeTransaction(amount, card)
     local r = rttp.postSync(pointOfSale.server, '', 'table', {
         key = pointOfSale._key,
         origin = card,
-        amount = amount
+        amount = amount,
+        desc = desc
     }, nil, 10)
 
     if type(r) ~= 'table' then
