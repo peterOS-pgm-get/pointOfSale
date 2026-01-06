@@ -91,7 +91,7 @@ local function checkout()
                     local y = 4
                     for _, p in pairs(cart) do
                         printer.setCursorPos(1, y)
-                        printer.write(('% 3d% 8.2f %s'):format(p.qty, p.price, p.name))
+                        printer.write(('%3d%8.2f %s'):format(p.qty, p.price, p.name))
                         y = y + 1
                     end
                     printer.setCursorPos(1, y)
@@ -128,7 +128,7 @@ local function addToCart(product)
     if cart[product.id] then
         local prod = cart[product.id]
         prod.qty = prod.qty + 1
-        prod.button.text = ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name)
+        prod.button.text = ('%3dx %9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name)
     else
         local prod = {}
         prod.id = product.id
@@ -136,7 +136,7 @@ local function addToCart(product)
         prod.name = product.name
         prod.qty = 1
         prod.button = pos.gui.Button(1, #cart + 1, 16, 1, nil, nil,
-            ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name), function(btn)
+            ('%3dx %9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name), function(btn)
             if btn ~= 2 then
                 return
             end
@@ -147,7 +147,7 @@ local function addToCart(product)
                 gui.cartList:removeElement(prod.buttonId)
                 return
             end
-            prod.button.text = ('% 3dx % 9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name)
+            prod.button.text = ('%3dx %9s %s'):format(prod.qty, ('$%.2f'):format(prod.price), prod.name)
         end)
         prod.buttonId = gui.cartList:addElement(prod.button)
         cart[prod.id] = prod
@@ -165,7 +165,7 @@ gui.window:addElement(gui.productList)
 
 gui.prodEls = {}
 for i, product in pairs(products) do
-    local text = ('% 5d % 9s %s'):format(product.id, ('$%.2f'):format(product.price), product.name)
+    local text = ('%5d %9s %s'):format(product.id, ('$%.2f'):format(product.price), product.name)
     local prod = product
     product.button = pos.gui.Button(1, i, 30, 1, colors.black, nil, text, function(btn)
         if btn ~= 1 then
